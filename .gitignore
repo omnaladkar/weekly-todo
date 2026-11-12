@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env
+.env.local
+.env.*.local
+server/data/tasks.json
+server/data/*.tmp
+.netlify/
+coverage/
+*.log
+.DS_Store
+Thumbs.db

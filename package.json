@@ -1,0 +1,26 @@
+{
+  "name": "weekly-todo",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A MERN to-do app that organises tasks by week.",
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently -n api,web -c magenta,cyan \"npm run dev -w server\" \"npm run dev -w client\"",
+    "dev:api": "npm run dev -w server",
+    "dev:web": "npm run dev -w client",
+    "build": "npm run build -w client",
+    "start": "npm run start -w server",
+    "seed": "npm run seed -w server",
+    "test": "npm run test -w server"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
