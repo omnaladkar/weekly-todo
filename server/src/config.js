@@ -14,6 +14,8 @@ export const config = {
   port: Number(process.env.PORT || 5000),
   mongoUri: (process.env.MONGODB_URI || '').trim(),
   clientOrigin: (process.env.CLIENT_ORIGIN || '*').trim(),
+  serveClient: process.env.SERVE_CLIENT === 'true',
+  clientDist: path.resolve(here, '..', '..', 'client', 'dist'),
   dataDir: process.env.DATA_DIR
     ? path.resolve(process.env.DATA_DIR)
     : isServerless

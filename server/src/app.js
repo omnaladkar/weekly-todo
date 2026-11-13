@@ -1,3 +1,5 @@
+import fs from 'node:fs';
+import path from 'node:path';
 import cors from 'cors';
 import express from 'express';
 import { config } from './config.js';
@@ -29,6 +31,14 @@ export function createApp(repo) {
   });
 
   app.use('/api/tasks', tasksRouter(repo));
+
+  if (config.serveClient && fs.existsSync(config.clientDist)) {
+    app.use(express.static(config.clientDist, { index: false, maxAge: '1h' }));
+    app.get('*', (req, res, next) => {
+      if (req.path.startsWith('/api')) return next();
+      res.sendFile(path.join(config.clientDist, 'index.html'));
+    });
+  }
 
   app.use((req, res) => {
     res.status(404).json({ error: 'Not found' });
