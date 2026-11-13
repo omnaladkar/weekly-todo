@@ -1,4 +1,5 @@
 import { config } from '../config.js';
+import { createBlobRepository } from './blobRepository.js';
 import { createFileRepository } from './fileRepository.js';
 import { createMongoRepository } from './mongoRepository.js';
 
@@ -9,7 +10,9 @@ export function getRepository() {
     repositoryPromise = (
       config.mongoUri
         ? createMongoRepository(config.mongoUri)
-        : createFileRepository(config.dataDir)
+        : config.blobConfigured
+          ? createBlobRepository()
+          : createFileRepository(config.dataDir)
     ).catch((err) => {
       repositoryPromise = null;
       throw err;

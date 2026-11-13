@@ -13,6 +13,9 @@ dotenv.config({ path: path.resolve(here, '..', '.env') });
 export const config = {
   port: Number(process.env.PORT || 5000),
   mongoUri: (process.env.MONGODB_URI || '').trim(),
+  blobConfigured: Boolean(
+    process.env.BLOB_READ_WRITE_TOKEN || process.env.BLOB_STORE_ID
+  ),
   clientOrigin: (process.env.CLIENT_ORIGIN || '*').trim(),
   serveClient: process.env.SERVE_CLIENT === 'true',
   clientDist: path.resolve(here, '..', '..', 'client', 'dist'),

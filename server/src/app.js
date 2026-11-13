@@ -25,7 +25,7 @@ export function createApp(repo) {
   app.get('/api/health', (req, res) => {
     res.json({
       status: 'ok',
-      store: config.mongoUri ? 'mongodb' : 'file',
+      store: config.mongoUri ? 'mongodb' : config.blobConfigured ? 'blob' : 'file',
       time: new Date().toISOString(),
     });
   });
